@@ -8,7 +8,7 @@ provider "aws" {
 
 # VPC; Subnets
 module "network" {
-  source               = "./modules/network"
-  region               = var.region
-  vpc_cidr             = var.vpc_cidr
+  source   = "./modules/network"
+  region   = var.region
+  vpc_cidr = var.vpc_cidr
 }
