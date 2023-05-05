@@ -17,8 +17,8 @@ data "aws_availability_zones" "available" {
 
 resource "aws_subnet" "snet-public" {
   vpc_id            = aws_vpc.vpc.id
-  availability_zone = data.aws_availability_zones.available.names[count.index]
-  cidr_block        = "${split(".", var.vpc_cidr)[0]}.${split(".", var.vpc_cidr)[1]}.${var.public_network_index + count.index}.0/24"
+  availability_zone = data.aws_availability_zones.available.names[1]
+  cidr_block        = "${split(".", var.vpc_cidr)[0]}.${split(".", var.vpc_cidr)[1]}.1.0/24"
 }
 
 # Public route table
@@ -32,7 +32,7 @@ resource "aws_route_table" "pulic_route_table" {
 
 # Association of Route Table to Subnets
 resource "aws_route_table_association" "first_public_snet" {
-  subnet_id      = element(aws_subnet.snet-public.*.id, count.index)
+  subnet_id      = element(aws_subnet.snet-public.*.id, 1)
   route_table_id = aws_route_table.pulic_route_table.id
 }
 
@@ -45,10 +45,10 @@ resource "aws_eip" "elastic_ip" {
 # NAT Gateways
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.elastic_ip.id
-  subnet_id     = aws_subnet.snet-public[0].id
+  subnet_id     = aws_subnet.snet-public.id
   depends_on = [
     aws_internet_gateway.main,
     aws_eip.elastic_ip,
-    aws_subnet.snet-public[0]
+    aws_subnet.snet-public
   ]
 }
