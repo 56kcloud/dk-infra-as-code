@@ -98,3 +98,7 @@ module "ecs" {
   container_image        = module.ecr.aws_ecr_repository_url
   container_secrets_arns = module.secrets.application_secrets_arn
 }
+
+module "database" {
+  source = "./modules/db"
+}
