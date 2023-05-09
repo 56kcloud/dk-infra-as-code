@@ -5,10 +5,15 @@
 resource "aws_acm_certificate" "certificate" {
   domain_name       = var.domain_name
   validation_method = "DNS"
-
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "time_sleep" "wait_20_seconds" {
+  depends_on = [aws_acm_certificate_validation.validation]
+
+  create_duration = "20s"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

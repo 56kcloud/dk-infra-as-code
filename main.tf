@@ -49,7 +49,7 @@ module "primary_domain" {
 
 module "generate_certificate" {
   source         = "./modules/acm"
-  domain_name    = var.domain_name
+  domain_name    = var.domain_name_cert
   domain_zone_id = module.primary_domain.primary_domain_hosted_zone_id
 }
 

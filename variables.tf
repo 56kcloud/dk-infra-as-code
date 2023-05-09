@@ -79,6 +79,10 @@ variable "domain_name" {
   description = "root domain used by route 53 to define subdomains"
   default     = "katimavik.dev"
 }
+variable "domain_name_cert" {
+  description = "subdomain wild card for generate cert"
+  default     = "*.katimavik.dev"
+}
 variable "comment_domain_name" {
   description = "description comment on domain name"
   default     = "default domain name comment"

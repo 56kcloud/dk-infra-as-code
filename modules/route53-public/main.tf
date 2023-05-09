@@ -4,4 +4,5 @@
 resource "aws_route53_zone" "primary_domain" {
   name    = var.primary_domain_name
   comment = var.primary_domain_name_comment
+  force_destroy = "false"
 }
