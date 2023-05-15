@@ -27,4 +27,10 @@ $ terraform validate
 $ terraform plan
 ```
 
+## use github actions 
+you have two worfklows :
+
+- the `PR workflow validation` used to validate the syntax and the lint of your files run only on pull requests triggred on every push.
+- the `apply workflow` apply modification on environement or create a new one default main branch but can be changed.
+
 
